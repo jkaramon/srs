@@ -12,7 +12,7 @@ ENV PORT=3000
 WORKDIR /app
 
 RUN addgroup --system srs && \
-          adduser --system -G srs srs
+    adduser --system -G srs srs
 
 COPY dist/apps/srs srs
 RUN chown -R srs:srs .
