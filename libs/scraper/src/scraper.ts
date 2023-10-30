@@ -1,9 +1,9 @@
 import { Browser, Locator, Page, chromium } from 'playwright';
-import { ApartmentData } from './apartment-data';
+import { ApartmentScrapeData } from './apartment-scrape-data';
 
 export async function scrape(
   numberOfApartments: number
-): Promise<ApartmentData[]> {
+): Promise<ApartmentScrapeData[]> {
   const browser = await setupBrowser();
   const page = await browser.newPage();
   // Go to first page
@@ -29,7 +29,7 @@ export async function scrape(
   return apartments;
 }
 
-export async function scrapePage(page: Page): Promise<ApartmentData[]> {
+export async function scrapePage(page: Page): Promise<ApartmentScrapeData[]> {
   await page.waitForSelector('.property');
   const apartmentLocators = await page.locator('.property').all();
   console.log('apartments', apartmentLocators.length);
@@ -39,7 +39,9 @@ export async function scrapePage(page: Page): Promise<ApartmentData[]> {
   return apartments;
 }
 
-async function extractApartmentData(locator: Locator): Promise<ApartmentData> {
+async function extractApartmentData(
+  locator: Locator
+): Promise<ApartmentScrapeData> {
   const title = await locator.locator('.text-wrap h2').innerText();
   const images = await locator.locator('preact img').all();
 

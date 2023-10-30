@@ -4,11 +4,11 @@ const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
 const app = express();
-import { scrape } from '@srs/libs/scraper';
+
+import { scrapeAndStore } from './scrape-and-store';
 
 (async () => {
-  const data = await scrape(60);
-  console.log('done', data.length, data[59]);
+  await scrapeAndStore();
 })();
 
 // app.get('/', (req, res) => {

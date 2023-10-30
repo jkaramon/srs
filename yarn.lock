@@ -6933,6 +6933,11 @@ postcss@^8.4.23, postcss@^8.4.27:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
+postgres@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/postgres/-/postgres-3.4.2.tgz#979d2758459c9348bdca79b397ace45d9ebda47d"
+  integrity sha512-0UcCGvDBSaAzLeWwiq+QVmiGfOPTosFb+sxJUUtd+7Pi/ByFPuz6Gq05LbS0sM1ghMWC5atuks3pfl34g0qmFw==
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
