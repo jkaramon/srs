@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'https://unpkg.com/open-props';
+
+.pager {
+  --_link-bg: white;
+  --_link-text: var(--gray-7);
+
+  display: flex;
+  gap: var(--size-2);
+}
+
+.pager > a {
+  background-color: var(--_link-bg);
+  color: var(--_link-text);
+  padding-inline: var(--size-3);
+  padding-block: var(--size-2);
+  border-radius: var(--radius-3);
+  user-select: none;
+  text-decoration: none;
+  outline-offset: 3px;
+  transition: background-color 0.2s var(--ease-3), color 0.2s var(--ease-3);
+
+  &[href]:is(.current, :hover, :focus-visible) {
+    --_link-bg: var(--indigo-5);
+    --_link-text: var(--indigo-0);
+  }
+
+  &[href]:is(.disabled) {
+    cursor: not-allowed;
+    --_link-bg: transparent;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+html {
+  block-size: 100%;
+  font-family: system-ui, sans-serif;
+  background-color: var(--gray-2);
+}
+
+body {
+  min-block-size: 100%;
+  display: grid;
+  place-content: center;
+}

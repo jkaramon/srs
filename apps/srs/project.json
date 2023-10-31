@@ -12,7 +12,7 @@
         "platform": "node",
         "outputPath": "dist/apps/srs",
         "format": ["cjs"],
-        "bundle": false,
+        "bundle": true,
         "main": "apps/srs/src/main.ts",
         "tsConfig": "apps/srs/tsconfig.app.json",
         "assets": ["apps/srs/src/assets"],

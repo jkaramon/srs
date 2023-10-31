@@ -18,11 +18,16 @@ export async function scrape(
   while (apartments.length < numberOfApartments) {
     await page.click('.paging-next');
     const moreApartments = await scrapePage(page);
+
     if (moreApartments.length === 0) {
       break;
     }
     apartments.push(...moreApartments);
+    console.log(
+      `Scraping next ${moreApartments.length} apartments, total: ${apartments.length}`
+    );
   }
+  console.log(`Finished scraping ${apartments.length} apartments`);
 
   await page.waitForTimeout(3000); // wait for 5 seconds
   await browser.close();
@@ -31,8 +36,8 @@ export async function scrape(
 
 export async function scrapePage(page: Page): Promise<ApartmentScrapeData[]> {
   await page.waitForSelector('.property');
+
   const apartmentLocators = await page.locator('.property').all();
-  console.log('apartments', apartmentLocators.length);
   const apartments = await Promise.all(
     apartmentLocators.map((apartment) => extractApartmentData(apartment))
   );
@@ -53,7 +58,7 @@ async function extractApartmentData(
 
 async function setupBrowser(): Promise<Browser> {
   const browser = await chromium.launch({
-    headless: false, // setting this to true will not run the UI
+    headless: true // setting this to true will not run the UI
   });
   return browser;
 }

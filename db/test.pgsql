@@ -1,0 +1,2 @@
+SELECT * FROM apartments
+LIMIT 10 OFFSET 10
