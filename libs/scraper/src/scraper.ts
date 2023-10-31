@@ -2,16 +2,19 @@ import { Browser, Locator, Page, chromium } from 'playwright';
 import { ApartmentScrapeData } from './apartment-scrape-data';
 
 export async function scrape(
-  numberOfApartments: number
+  url: string,
+  numberOfApartments: number,
+  headless = true
 ): Promise<ApartmentScrapeData[]> {
-  const browser = await setupBrowser();
+  const browser = await setupBrowser(headless);
   const page = await browser.newPage();
   // Go to first page
-  await page.goto('https://www.sreality.cz/en/search/for-sale/apartments');
-  // hide cookie dialog
-  await page
-    .locator('.szn-cmp-dialog-container')
-    .evaluate((element) => (element.style.display = 'none'));
+  await page.goto(url);
+
+  // hide annoying cookie dialog
+  // await page
+  //   .locator('.szn-cmp-dialog-container')
+  //   .evaluate((element) => (element.style.display = 'none'));
 
   const apartments = await scrapePage(page);
 
@@ -56,9 +59,9 @@ async function extractApartmentData(
   return { title, imageUrls };
 }
 
-async function setupBrowser(): Promise<Browser> {
+async function setupBrowser(headless: boolean): Promise<Browser> {
   const browser = await chromium.launch({
-    headless: true // setting this to true will not run the UI
+    headless // setting this to true will not run the UI
   });
   return browser;
 }
