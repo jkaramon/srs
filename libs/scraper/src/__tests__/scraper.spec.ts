@@ -6,7 +6,7 @@ describe('Scraper', () => {
   let result: ApartmentScrapeData[] = [];
   beforeAll(async () => {
     const filePath = path.join(__dirname, '../fixtures/test-page.html');
-    result = await scrape(`file://${filePath}`, 20);
+    result = await scrape(`file://${filePath}`, 20, false);
   }, 10000);
 
   it('should return data array', async () => {
