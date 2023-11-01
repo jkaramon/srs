@@ -21,14 +21,20 @@ export function App() {
     });
   }, []);
   return (
-    <section>
-      <h1>Apartment List</h1>
-      <ApartmentList data={apartments} />
-      <Pager
-        pageSize={pageInfo.limit}
-        currentPage={pageInfo.page}
-        totalRecords={pageInfo.totalCount}
-      />
+    <section className="list">
+      <header>
+        <h1>Apartment List</h1>
+      </header>
+      <section className="content">
+        <ApartmentList data={apartments} />
+      </section>
+      <footer>
+        <Pager
+          pageSize={pageInfo.limit}
+          currentPage={pageInfo.page}
+          totalRecords={pageInfo.totalCount}
+        />
+      </footer>
     </section>
   );
 }

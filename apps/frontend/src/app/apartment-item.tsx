@@ -7,7 +7,7 @@ export interface ApartmentItemProps {
 export function ApartmentItem(props: ApartmentItemProps) {
   const { data } = props;
   return (
-    <li>
+    <li className="item">
       <h3>{data.title}</h3>
       <img src={data.image_url} alt={data.title} />
     </li>

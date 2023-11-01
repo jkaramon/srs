@@ -8,10 +8,10 @@ export interface ApartmentListProps {
 export function ApartmentList(props: ApartmentListProps) {
   const { data } = props;
   return (
-    <section>
+    <ul>
       {data.map((apartment) => (
         <ApartmentItem data={apartment} key={apartment.id} />
       ))}
-    </section>
+    </ul>
   );
 }
