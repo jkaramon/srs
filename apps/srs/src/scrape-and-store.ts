@@ -4,7 +4,7 @@ import { deleteApartments, insertApartments } from './repository';
 
 export async function scrapeAndStore() {
   const pageUrl = 'https://www.sreality.cz/en/search/for-sale/apartments';
-  const scrapedApartments = await scrape(pageUrl, 500);
+  const scrapedApartments = await scrape(pageUrl, 500, true);
   const apartments: Apartment[] = scrapedApartments.map((scraped) => ({
     title: scraped.title,
     image_url: scraped.imageUrls.length > 0 ? scraped.imageUrls[0] : null

@@ -6,7 +6,6 @@ export interface ApartmentItemProps {
 
 export function ApartmentItem(props: ApartmentItemProps) {
   const { data } = props;
-  console.log(data.id);
   return (
     <li>
       <h3>{data.title}</h3>

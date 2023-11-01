@@ -1,29 +1,51 @@
-import { Apartment } from './types/apartment';
+/* eslint-disable jsx-a11y/anchor-is-valid */
 
+import classNames from 'classnames';
 export interface PagerProps {
   currentPage: number;
-  totalPages: number;
+  pageSize: number;
+  totalRecords: number;
 }
 
 export function Pager(props: PagerProps) {
-  const { currentPage, totalPages } = props;
+  const { currentPage, totalRecords, pageSize } = props;
+  const totalPages = Math.ceil(totalRecords / pageSize);
   const hasPrevious = currentPage > 1;
   const hasNext = currentPage < totalPages;
+
+  const previousClasses = classNames('prev', {
+    disabled: !hasPrevious
+  });
+
+  const nextClasses = classNames('next', {
+    disabled: !hasNext
+  });
 
   if (totalPages === 1) {
     return null;
   }
+
+  const pages = [...Array(totalPages).keys()].map((i) => i + 1);
+  const prevPage = hasPrevious ? currentPage - 1 : 1;
+  const nextPage = hasNext ? currentPage + 1 : totalPages;
   return (
     <nav className="pager">
-      <a href="" className="disabled">
+      <a href={`?page=${prevPage}`} className={previousClasses}>
         Previous
       </a>
-      <a href="?page=1" className="current">
-        1
+      {pages.map((pageNumber) => (
+        <a
+          key={pageNumber}
+          href={`?page=${pageNumber}`}
+          className={classNames({ current: pageNumber === currentPage })}
+        >
+          {pageNumber}
+        </a>
+      ))}
+
+      <a href={`?page=${nextPage}`} className={nextClasses}>
+        Next
       </a>
-      <a href="?page=2">2</a>
-      <a href="?page=3">3</a>
-      <a href="?page=2">Next</a>
     </nav>
   );
 }

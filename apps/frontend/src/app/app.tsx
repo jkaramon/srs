@@ -13,17 +13,22 @@ export function App() {
     totalCount: 0
   });
   useEffect(() => {
-    getApartments(1, 10).then((res) => {
-      console.log(res.data);
+    const params = new URLSearchParams(window.location.search);
+    const page = parseInt(params.get('page') || '1', 10);
+    getApartments(page, 50).then((res) => {
       setApartments(res.data);
-      setPageInfo(res.pageInfo);
+      setPageInfo({ ...res.pageInfo, page });
     });
   }, []);
   return (
     <section>
       <h1>Apartment List</h1>
       <ApartmentList data={apartments} />
-      <Pager currentPage={pageInfo.page} totalPages={5} />
+      <Pager
+        pageSize={pageInfo.limit}
+        currentPage={pageInfo.page}
+        totalRecords={pageInfo.totalCount}
+      />
     </section>
   );
 }

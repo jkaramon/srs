@@ -8,18 +8,19 @@ export async function scrape(
 ): Promise<ApartmentScrapeData[]> {
   const browser = await setupBrowser(headless);
   const page = await browser.newPage();
+  page.setViewportSize({ width: 1280, height: 800 });
   // Go to first page
   await page.goto(url);
 
   // hide annoying cookie dialog
-  // await page
-  //   .locator('.szn-cmp-dialog-container')
-  //   .evaluate((element) => (element.style.display = 'none'));
+  await page
+    .locator('.szn-cmp-dialog-container')
+    .evaluate((element) => (element.style.display = 'none'));
 
   const apartments = await scrapePage(page);
 
   while (apartments.length < numberOfApartments) {
-    await page.click('.paging-next');
+    await page.click('.paging-item .paging-next');
     const moreApartments = await scrapePage(page);
 
     if (moreApartments.length === 0) {
